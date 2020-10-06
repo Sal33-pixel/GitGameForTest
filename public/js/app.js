@@ -1955,6 +1955,7 @@ Vue.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
       loader: false,
       main_topics_name: '',
       topics_name: '',
+      list_id: null,
       topics_list: []
     };
   },
@@ -1993,8 +1994,9 @@ Vue.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
       });
     },
     topics_name_send: function topics_name_send() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/admin_savedata', {
-        'topics_name': this.topics_name
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/admin_save_topics_name', {
+        'topics_name': this.topics_name,
+        'list_id': this.list_id
       }).then(function (response) {
         console.log('response:' + response.data.success);
       }.bind(this))["catch"](function (error) {
@@ -3261,8 +3263,31 @@ var render = function() {
           _c(
             "select",
             {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.list_id,
+                  expression: "list_id"
+                }
+              ],
               staticClass: "custom-select my-1 mr-sm-2",
-              attrs: { id: "inlineFormCustomSelectPref" }
+              attrs: { id: "inlineFormCustomSelectPref" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.list_id = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
             },
             [
               _c("option", { attrs: { selected: "" } }, [

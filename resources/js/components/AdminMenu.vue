@@ -19,7 +19,7 @@
       <li class="list-group-item">
         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Al téma létrehozás</label>
 
-        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+        <select v-model="list_id" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
           <option selected>Válassz fő témát</option>
           <option v-for="list in this.topics_list" :value="list.id">{{list.topics_name}}</option>  topics_list
         </select>
@@ -46,7 +46,8 @@ export default{
       loader:  false,
       main_topics_name: '',
       topics_name: '',
-      topics_list: []
+      list_id: null,
+      topics_list: [],
 
     }
   },
@@ -84,8 +85,9 @@ export default{
     },
 
     topics_name_send(){
-      axios.post('/admin_savedata', {
-                    'topics_name': this.topics_name
+      axios.post('/admin_save_topics_name', {
+                    'topics_name': this.topics_name,
+                    'list_id': this.list_id
                   }).then(function(response) {
                     console.log('response:' + response.data.success);
                   }.bind(this)).catch(function (error) { console.log('error: ' + error); });
