@@ -2005,6 +2005,8 @@ Vue.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
         'main_topics_name': this.main_topics_name
       }).then(function (response) {
         console.log('response:' + response.data.success);
+        this.main_topics_name = '';
+        this.main_topics_list();
       }.bind(this))["catch"](function (error) {
         console.log('error: ' + error);
       });
@@ -2015,6 +2017,7 @@ Vue.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
         'list_id': this.list_id
       }).then(function (response) {
         console.log('response:' + response.data.success);
+        this.topics_name = '';
       }.bind(this))["catch"](function (error) {
         console.log('error: ' + error);
       });
@@ -3320,15 +3323,12 @@ var render = function() {
                       }
                     }
                   },
-                  [
-                    _vm._l(this.topics_list, function(list) {
-                      return _c("option", { domProps: { value: list.id } }, [
-                        _vm._v(_vm._s(list.topics_name))
-                      ])
-                    }),
-                    _vm._v("  topics_list\n        ")
-                  ],
-                  2
+                  _vm._l(this.topics_list, function(list) {
+                    return _c("option", { domProps: { value: list.id } }, [
+                      _vm._v(_vm._s(list.topics_name))
+                    ])
+                  }),
+                  0
                 ),
                 _vm._v("\n        Al téma neve: "),
                 _c("input", {

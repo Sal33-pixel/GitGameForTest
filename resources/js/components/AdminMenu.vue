@@ -35,7 +35,7 @@
         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Válassz fő témát</label>
 
         <select v-model="list_id" title="Válassz fő témát" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-          <option v-for="list in this.topics_list" :value="list.id">{{list.topics_name}}</option>  topics_list
+          <option v-for="list in this.topics_list" :value="list.id">{{list.topics_name}}</option>
         </select>
         Al téma neve: <input type="text" class="form-control" v-model="topics_name">
         <input type="button" @click="topics_name_send()" class="btn btn-primary" value="Mentés">
@@ -97,6 +97,8 @@ export default{
                     'main_topics_name': this.main_topics_name
                   }).then(function(response) {
                     console.log('response:' + response.data.success);
+                    this.main_topics_name = ''
+                    this.main_topics_list();
                   }.bind(this)).catch(function (error) { console.log('error: ' + error); });
     },
 
@@ -106,6 +108,7 @@ export default{
                     'list_id': this.list_id
                   }).then(function(response) {
                     console.log('response:' + response.data.success);
+                    this.topics_name = ''
                   }.bind(this)).catch(function (error) { console.log('error: ' + error); });
     },
 
