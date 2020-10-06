@@ -7,9 +7,24 @@
     </div>
 
   </div></div>
+
+  <ul class="nav nav-tabs " id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Új topics</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Felhasználók</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
   <div class="card color">
     <div id="card-header" class="card-header">
-      Admin menü
+      Új topics létrehozása
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
@@ -17,20 +32,21 @@
         <input type="button" @click="main_topics_name_send()" class="btn btn-primary" value="Mentés">
       </li>
       <li class="list-group-item">
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Al téma létrehozás</label>
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Válassz fő témát</label>
 
-        <select v-model="list_id" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-          <option selected>Válassz fő témát</option>
+        <select v-model="list_id" title="Válassz fő témát" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
           <option v-for="list in this.topics_list" :value="list.id">{{list.topics_name}}</option>  topics_list
         </select>
         Al téma neve: <input type="text" class="form-control" v-model="topics_name">
         <input type="button" @click="topics_name_send()" class="btn btn-primary" value="Mentés">
       </li>
-      <li class="list-group-item">
-        Felhasználók törlés szerkesztés stb
-      </li>
     </ul>
   </div>
+</div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Felhasználók törlés szerkesztés stb</div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">c</div>
+</div>
+
 </div>
 </template>
 
@@ -104,6 +120,19 @@ export default{
 </script>
 
 <style scoped>
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+  color: black;
+      background-color: #b4cee7;
+      border-color: #dee2e6 #dee2e6 #f8fafc;
+}
+a{
+  color: black;
+}
+
+a:hover{
+  color: black;
+}
 #loader{
   color: green;
   position: relative;

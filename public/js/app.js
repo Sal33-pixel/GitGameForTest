@@ -1946,6 +1946,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 Vue.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2086,7 +2102,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#loader[data-v-88ecbf1a]{\n  color: green;\n  position: relative;\n  top: 50%;\n  left: 50%;\n\n  width: 5rem;\n  height: 5rem;\n}\n#ajax_loader[data-v-88ecbf1a]{\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  padding-top: 250px;\n  background-color: black;\n  opacity: 0.5;\n  z-index: 99;\n  top: 0px;\n  left: 0px;\n}\n#card-header[data-v-88ecbf1a]{\n  color: white;\n}\n.color[data-v-88ecbf1a]{\n  background-color: #5b5b5b;\n}\n.color li[data-v-88ecbf1a]{\n  background-color: #b5c1c2;\n}\n", ""]);
+exports.push([module.i, "\n.nav-tabs .nav-link.active[data-v-88ecbf1a], .nav-tabs .nav-item.show .nav-link[data-v-88ecbf1a]{\n  color: black;\n      background-color: #b4cee7;\n      border-color: #dee2e6 #dee2e6 #f8fafc;\n}\na[data-v-88ecbf1a]{\n  color: black;\n}\na[data-v-88ecbf1a]:hover{\n  color: black;\n}\n#loader[data-v-88ecbf1a]{\n  color: green;\n  position: relative;\n  top: 50%;\n  left: 50%;\n\n  width: 5rem;\n  height: 5rem;\n}\n#ajax_loader[data-v-88ecbf1a]{\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  padding-top: 250px;\n  background-color: black;\n  opacity: 0.5;\n  z-index: 99;\n  top: 0px;\n  left: 0px;\n}\n#card-header[data-v-88ecbf1a]{\n  color: white;\n}\n.color[data-v-88ecbf1a]{\n  background-color: #5b5b5b;\n}\n.color li[data-v-88ecbf1a]{\n  background-color: #b5c1c2;\n}\n", ""]);
 
 // exports
 
@@ -3209,138 +3225,174 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: "card color" }, [
-      _c("div", { staticClass: "card-header", attrs: { id: "card-header" } }, [
-        _vm._v("\n      Admin menü\n    ")
-      ]),
-      _vm._v(" "),
-      _c("ul", { staticClass: "list-group list-group-flush" }, [
-        _c("li", { staticClass: "list-group-item" }, [
-          _vm._v("\n        Fő téma neve: "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.main_topics_name,
-                expression: "main_topics_name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.main_topics_name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.main_topics_name = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "btn btn-primary",
-            attrs: { type: "button", value: "Mentés" },
-            on: {
-              click: function($event) {
-                return _vm.main_topics_name_send()
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "list-group-item" }, [
-          _c(
-            "label",
-            {
-              staticClass: "my-1 mr-2",
-              attrs: { for: "inlineFormCustomSelectPref" }
-            },
-            [_vm._v("Al téma létrehozás")]
-          ),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.list_id,
-                  expression: "list_id"
-                }
-              ],
-              staticClass: "custom-select my-1 mr-sm-2",
-              attrs: { id: "inlineFormCustomSelectPref" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.list_id = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
-              }
-            },
-            [
-              _c("option", { attrs: { selected: "" } }, [
-                _vm._v("Válassz fő témát")
+    _vm._m(1),
+    _vm._v(" "),
+    _c("div", { staticClass: "tab-content", attrs: { id: "myTabContent" } }, [
+      _c(
+        "div",
+        {
+          staticClass: "tab-pane fade show active",
+          attrs: { id: "home", role: "tabpanel", "aria-labelledby": "home-tab" }
+        },
+        [
+          _c("div", { staticClass: "card color" }, [
+            _c(
+              "div",
+              { staticClass: "card-header", attrs: { id: "card-header" } },
+              [_vm._v("\n      Új topics létrehozása\n    ")]
+            ),
+            _vm._v(" "),
+            _c("ul", { staticClass: "list-group list-group-flush" }, [
+              _c("li", { staticClass: "list-group-item" }, [
+                _vm._v("\n        Fő téma neve: "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.main_topics_name,
+                      expression: "main_topics_name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.main_topics_name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.main_topics_name = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button", value: "Mentés" },
+                  on: {
+                    click: function($event) {
+                      return _vm.main_topics_name_send()
+                    }
+                  }
+                })
               ]),
               _vm._v(" "),
-              _vm._l(this.topics_list, function(list) {
-                return _c("option", { domProps: { value: list.id } }, [
-                  _vm._v(_vm._s(list.topics_name))
-                ])
-              }),
-              _vm._v("  topics_list\n        ")
-            ],
-            2
-          ),
-          _vm._v("\n        Al téma neve: "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.topics_name,
-                expression: "topics_name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.topics_name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.topics_name = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "btn btn-primary",
-            attrs: { type: "button", value: "Mentés" },
-            on: {
-              click: function($event) {
-                return _vm.topics_name_send()
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "list-group-item" }, [
-          _vm._v("\n        Felhasználók törlés szerkesztés stb\n      ")
-        ])
-      ])
+              _c("li", { staticClass: "list-group-item" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "my-1 mr-2",
+                    attrs: { for: "inlineFormCustomSelectPref" }
+                  },
+                  [_vm._v("Válassz fő témát")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.list_id,
+                        expression: "list_id"
+                      }
+                    ],
+                    staticClass: "custom-select my-1 mr-sm-2",
+                    attrs: {
+                      title: "Válassz fő témát",
+                      id: "inlineFormCustomSelectPref"
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.list_id = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _vm._l(this.topics_list, function(list) {
+                      return _c("option", { domProps: { value: list.id } }, [
+                        _vm._v(_vm._s(list.topics_name))
+                      ])
+                    }),
+                    _vm._v("  topics_list\n        ")
+                  ],
+                  2
+                ),
+                _vm._v("\n        Al téma neve: "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.topics_name,
+                      expression: "topics_name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.topics_name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.topics_name = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button", value: "Mentés" },
+                  on: {
+                    click: function($event) {
+                      return _vm.topics_name_send()
+                    }
+                  }
+                })
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "tab-pane fade",
+          attrs: {
+            id: "profile",
+            role: "tabpanel",
+            "aria-labelledby": "profile-tab"
+          }
+        },
+        [_vm._v("Felhasználók törlés szerkesztés stb")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "tab-pane fade",
+          attrs: {
+            id: "contact",
+            role: "tabpanel",
+            "aria-labelledby": "contact-tab"
+          }
+        },
+        [_vm._v("c")]
+      )
     ])
   ])
 }
@@ -3359,6 +3411,70 @@ var staticRenderFns = [
         [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      { staticClass: "nav nav-tabs ", attrs: { id: "myTab", role: "tablist" } },
+      [
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link active",
+              attrs: {
+                id: "home-tab",
+                "data-toggle": "tab",
+                href: "#home",
+                role: "tab",
+                "aria-controls": "home",
+                "aria-selected": "true"
+              }
+            },
+            [_vm._v("Új topics")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: {
+                id: "profile-tab",
+                "data-toggle": "tab",
+                href: "#profile",
+                role: "tab",
+                "aria-controls": "profile",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v("Felhasználók")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: {
+                id: "contact-tab",
+                "data-toggle": "tab",
+                href: "#contact",
+                role: "tab",
+                "aria-controls": "contact",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v("Contact")]
+          )
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
