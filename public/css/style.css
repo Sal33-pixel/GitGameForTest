@@ -1,0 +1,40 @@
+#navbar{
+  background-color: #5b5b5b;
+}
+
+body{
+  background-color: #9d9d9d;
+}
+
+.container_plus{
+  margin-top: 55px;
+}
+
+.cell{
+  border: solid 0px;
+  padding-top: 20px;
+
+}
+ #user_name{
+   display: inline-flex;
+ }
+
+.card_color{
+  background-color: #b5c1c2;
+  border: 0px;
+}
+
+#right_menu {
+  padding-left: 0px;
+}
+
+.right_menu_card {
+    width: 200px;
+    background-color: #9d9d9d;
+}
+
+.right_menu_card li{
+    background-color: #b5c1c2;
+    padding-left: 5px;
+
+}
