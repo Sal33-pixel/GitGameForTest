@@ -3378,7 +3378,7 @@ var render = function() {
             "aria-labelledby": "profile-tab"
           }
         },
-        [_vm._v("Felhasználók törlés szerkesztés stb")]
+        [_vm._v("Topics törlés / szerkesztés")]
       ),
       _vm._v(" "),
       _c(
@@ -3391,7 +3391,7 @@ var render = function() {
             "aria-labelledby": "contact-tab"
           }
         },
-        [_vm._v("c")]
+        [_vm._v("Felhasználók törlés / szerkesztés stb")]
       )
     ])
   ])
@@ -3452,7 +3452,7 @@ var staticRenderFns = [
                 "aria-selected": "false"
               }
             },
-            [_vm._v("Felhasználók")]
+            [_vm._v("Topics szerkesztése")]
           )
         ]),
         _vm._v(" "),
@@ -3470,7 +3470,7 @@ var staticRenderFns = [
                 "aria-selected": "false"
               }
             },
-            [_vm._v("Contact")]
+            [_vm._v("Felhasználók")]
           )
         ])
       ]
