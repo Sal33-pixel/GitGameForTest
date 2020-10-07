@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('left-menu', require('./components/LeftMenu.vue').default);
 Vue.component('admin-menu', require('./components/AdminMenu.vue').default);
+Vue.component('topics-form', require('./components/TopicsForm.vue').default);
 
 
 /**

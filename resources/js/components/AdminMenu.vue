@@ -32,7 +32,7 @@
         <input type="button" @click="main_topics_name_send()" class="btn btn-primary" value="Mentés">
       </li>
       <li class="list-group-item">
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Válassz fő témát</label>
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Válassz fő témát:</label>
 
         <select v-model="list_id" title="Válassz fő témát" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
           <option v-for="list in this.topics_list" :value="list.id">{{list.topics_name}}</option>

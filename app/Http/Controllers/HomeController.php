@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\main_topics_name;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+     public function topics_list()
+     {
+       $topics_list = DB::table('all_topics')->where('parent_id', 0)->select('id','topics_name')->get();
+       return response()->json([
+         'success' => 'Main list load ok.',
+         'topics_list' => $topics_list
+     ]);
+     }
 
      public function index_right_menu()
      {

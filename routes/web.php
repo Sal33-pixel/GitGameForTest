@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/admin_save_main_topics_name', 'Admin@admin_save_main_topics_name');
 Route::post('/admin_save_topics_name', 'Admin@admin_save_topics_name');
 Route::get('/admin_main_topics_list', 'Admin@admin_main_topics_list');
+Route::get('/topics_list', 'HomeController@topics_list');
 
 Route::get('/admin', function(){
   if(isset(Auth::user()->admin) && Auth::user()->admin == true){
