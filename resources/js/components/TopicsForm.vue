@@ -12,11 +12,11 @@
       <li class="nav-item">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Fő Témák</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Topics szerkesztése</a>
+      <li class="nav-item" v-if="topics === true">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">{{topics_name}}</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Felhasználók</a>
+      <li class="nav-item" v-show>
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">szöveg</a>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -25,15 +25,15 @@
 
     <div class="card color">
       <ul class="list-group list-group-flush">
-        <li v-for="(list, index) in this.topics_list"class="list-group-item">
-          Főtéma:<b> {{index}}</b>  Altémák száma: <b>{{list}}</b>  Hozzászólások száma: <b>?</b>
+        <li v-for="(list, topics_name) in this.topics_list"class="list-group-item">
+          Főtéma: <b><a @click="topic(topics_name)" href="#" >{{topics_name}}</a></b>  Altémák száma: <b>{{list}}</b>  Hozzászólások száma: <b>?</b>
         </li>
       </ul>
     </div>
 
   </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Topics törlés / szerkesztés</div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Felhasználók törlés / szerkesztés stb</div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Al topics adatai</div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">szöveg</div>
   </div>
 
   </div>
@@ -47,6 +47,8 @@ export default{
 
   data(){
     return{
+      topics_name: "",
+      topics: false,
       loader:  false,
       topics_list: [],
 
@@ -60,6 +62,12 @@ created(){
 },
 
 methods: {
+
+  topic(topics_name){
+    this.topics_name = topics_name;
+    this.topics = true;
+  },
+
   setAxiosLoader() {
                   axios.interceptors.request.use((config) => {
                       this.loader = true;

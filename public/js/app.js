@@ -2150,6 +2150,8 @@ __webpack_require__.r(__webpack_exports__);
   name: 'TopicsForm',
   data: function data() {
     return {
+      topics_name: "",
+      topics: false,
       loader: false,
       topics_list: []
     };
@@ -2161,6 +2163,10 @@ __webpack_require__.r(__webpack_exports__);
     this.setAxiosLoader();
   },
   methods: {
+    topic: function topic(topics_name) {
+      this.topics_name = topics_name;
+      this.topics = true;
+    },
     setAxiosLoader: function setAxiosLoader() {
       var _this = this;
 
@@ -3739,7 +3745,58 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm._m(1),
+    _c(
+      "ul",
+      { staticClass: "nav nav-tabs ", attrs: { id: "myTab", role: "tablist" } },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _vm.topics === true
+          ? _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link",
+                  attrs: {
+                    id: "profile-tab",
+                    "data-toggle": "tab",
+                    href: "#profile",
+                    role: "tab",
+                    "aria-controls": "profile",
+                    "aria-selected": "false"
+                  }
+                },
+                [_vm._v(_vm._s(_vm.topics_name))]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "li",
+          {
+            directives: [{ name: "show", rawName: "v-show" }],
+            staticClass: "nav-item"
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "contact-tab",
+                  "data-toggle": "tab",
+                  href: "#contact",
+                  role: "tab",
+                  "aria-controls": "contact",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("szöveg")]
+            )
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "tab-content", attrs: { id: "myTabContent" } }, [
       _c(
@@ -3753,10 +3810,23 @@ var render = function() {
             _c(
               "ul",
               { staticClass: "list-group list-group-flush" },
-              _vm._l(this.topics_list, function(list, index) {
+              _vm._l(this.topics_list, function(list, topics_name) {
                 return _c("li", { staticClass: "list-group-item" }, [
-                  _vm._v("\n        Főtéma:"),
-                  _c("b", [_vm._v(" " + _vm._s(index))]),
+                  _vm._v("\n        Főtéma: "),
+                  _c("b", [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.topic(topics_name)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(topics_name))]
+                    )
+                  ]),
                   _vm._v("  Altémák száma: "),
                   _c("b", [_vm._v(_vm._s(list))]),
                   _vm._v("  Hozzászólások száma: "),
@@ -3779,7 +3849,7 @@ var render = function() {
             "aria-labelledby": "profile-tab"
           }
         },
-        [_vm._v("Topics törlés / szerkesztés")]
+        [_vm._v("Al topics adatai")]
       ),
       _vm._v(" "),
       _c(
@@ -3792,7 +3862,7 @@ var render = function() {
             "aria-labelledby": "contact-tab"
           }
         },
-        [_vm._v("Felhasználók törlés / szerkesztés stb")]
+        [_vm._v("szöveg")]
       )
     ])
   ])
@@ -3817,65 +3887,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "ul",
-      { staticClass: "nav nav-tabs ", attrs: { id: "myTab", role: "tablist" } },
-      [
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link active",
-              attrs: {
-                id: "home-tab",
-                "data-toggle": "tab",
-                href: "#home",
-                role: "tab",
-                "aria-controls": "home",
-                "aria-selected": "true"
-              }
-            },
-            [_vm._v("Fő Témák")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              attrs: {
-                id: "profile-tab",
-                "data-toggle": "tab",
-                href: "#profile",
-                role: "tab",
-                "aria-controls": "profile",
-                "aria-selected": "false"
-              }
-            },
-            [_vm._v("Topics szerkesztése")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              attrs: {
-                id: "contact-tab",
-                "data-toggle": "tab",
-                href: "#contact",
-                role: "tab",
-                "aria-controls": "contact",
-                "aria-selected": "false"
-              }
-            },
-            [_vm._v("Felhasználók")]
-          )
-        ])
-      ]
-    )
+    return _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link active",
+          attrs: {
+            id: "home-tab",
+            "data-toggle": "tab",
+            href: "#home",
+            role: "tab",
+            "aria-controls": "home",
+            "aria-selected": "true"
+          }
+        },
+        [_vm._v("Fő Témák")]
+      )
+    ])
   }
 ]
 render._withStripped = true
