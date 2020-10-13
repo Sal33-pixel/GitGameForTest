@@ -27,10 +27,31 @@ class HomeController extends Controller
 
      public function topics_list()
      {
-       $topics_list = DB::table('all_topics')->where('parent_id', 0)->select('id','topics_name')->get();
+       $topics_array = [];
+
+       $main_topics_list = DB::table('all_topics')->where('parent_id', 0)->select('id','topics_name')->get();
+
+       foreach($main_topics_list as $row){
+         $topics_array[$row->topics_name] = $topics_list = DB::table('all_topics')->where('parent_id', $row->id)->count();
+       }
+       //dd($topics_array);
+
+/*         $topics_array = [];
+
+         $main_topics_list = DB::table('all_topics')->where('parent_id', 0)->select('id','topics_name')->get();
+         $topics_list = DB::table('all_topics')->where('parent_id', '!=', 0)->get();
+
+         foreach($topics_list as $sor){
+           foreach($main_topics_list as $row){
+             if($row->id == $sor->parent_id)
+             $topics_array[$row->id][] = $sor;
+           }
+         }*/
+
+
        return response()->json([
          'success' => 'Main list load ok.',
-         'topics_list' => $topics_list
+         'topics_list' => $topics_array
      ]);
      }
 

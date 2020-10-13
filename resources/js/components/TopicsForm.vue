@@ -25,7 +25,9 @@
 
     <div class="card color">
       <ul class="list-group list-group-flush">
-        <li v-for="list in this.topics_list"class="list-group-item">Főtéma:<b> {{list.topics_name}}</b> / Altémák száma: <b></b> / Hozzászólások száma: <b></b></li>
+        <li v-for="(list, index) in this.topics_list"class="list-group-item">
+          Főtéma:<b> {{index}}</b>  Altémák száma: <b>{{list}}</b>  Hozzászólások száma: <b>?</b>
+        </li>
       </ul>
     </div>
 

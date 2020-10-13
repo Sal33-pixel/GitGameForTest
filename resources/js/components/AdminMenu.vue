@@ -24,7 +24,7 @@
 
   <div class="card color">
     <div id="card-header" class="card-header">
-      Új topics létrehozása
+      @lang('other.Create_new_topics')
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
