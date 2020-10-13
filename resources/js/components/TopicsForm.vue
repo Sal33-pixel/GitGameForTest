@@ -32,7 +32,17 @@
     </div>
 
   </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Al topics adatai</div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+      <div class="card color">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Az all topics ok
+          </li>
+        </ul>
+      </div>
+
+    </div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">szöveg</div>
   </div>
 

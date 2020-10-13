@@ -2145,6 +2145,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'TopicsForm',
@@ -3839,18 +3849,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "tab-pane fade",
-          attrs: {
-            id: "profile",
-            role: "tabpanel",
-            "aria-labelledby": "profile-tab"
-          }
-        },
-        [_vm._v("Al topics adatai")]
-      ),
+      _vm._m(2),
       _vm._v(" "),
       _c(
         "div",
@@ -3904,6 +3903,31 @@ var staticRenderFns = [
         [_vm._v("Fő Témák")]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "tab-pane fade",
+        attrs: {
+          id: "profile",
+          role: "tabpanel",
+          "aria-labelledby": "profile-tab"
+        }
+      },
+      [
+        _c("div", { staticClass: "card color" }, [
+          _c("ul", { staticClass: "list-group list-group-flush" }, [
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("\n          Az all topics ok\n        ")
+            ])
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
