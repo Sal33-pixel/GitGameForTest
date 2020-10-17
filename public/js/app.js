@@ -2155,27 +2155,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
+Vue.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'TopicsForm',
   data: function data() {
     return {
-      topics_name: "",
-      topics: false,
+      tabs_menu: [{
+        'name': "Fő Témák",
+        'id': "fo"
+      }],
       loader: false,
-      topics_list: []
+      topics_list: [],
+      al_topics_list: [],
+      id: null
     };
   },
   created: function created() {
+    /** Lista adatok lekérése **/
     this.topics_lists();
     /** Ajax loader automatizálása **/
 
     this.setAxiosLoader();
   },
   methods: {
-    topic: function topic(topics_name) {
-      this.topics_name = topics_name;
-      this.topics = true;
+    topics_lists: function topics_lists() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/topics_list').then(function (response) {
+        console.log('response:' + response.data.success);
+        this.topics_list = response.data.topics_list;
+      }.bind(this))["catch"](function (error) {
+        console.log('error: ' + error);
+      });
+    },
+    topic: function topic(topics_name, id) {
+      /** Al topics fül létrehozás **/
+      this.tabs_menu.push({
+        'name': topics_name,
+        'id': id
+      });
+      this.id = id;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/topics_al_list', {
+        'id': this.id
+      }).then(function (response) {
+        console.log('response: ' + response.data.success);
+        this.al_topics_list = response.data.al_topics_list;
+      }.bind(this))["catch"](function (error) {
+        console.log('error: ' + error);
+      });
     },
     setAxiosLoader: function setAxiosLoader() {
       var _this = this;
@@ -2193,14 +2220,6 @@ __webpack_require__.r(__webpack_exports__);
       }, function (error) {
         _this.loader = false;
         return Promise.reject(error);
-      });
-    },
-    topics_lists: function topics_lists() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/topics_list').then(function (response) {
-        console.log('response:' + response.data.success);
-        this.topics_list = response.data.topics_list;
-      }.bind(this))["catch"](function (error) {
-        console.log('error: ' + error);
       });
     }
   }
@@ -2239,7 +2258,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card>.list-group:first-child .list-group-item[data-v-1c9cde9a]:first-child {\n     border-top-left-radius: .0rem;\n     border-top-right-radius: .0rem;\n}\n.list-group-item[data-v-1c9cde9a]:first-child {\n    /* border-top-left-radius: inherit; */\n    /*border-top-right-radius: inherit; */\n}\n.nav-tabs .nav-link.active[data-v-1c9cde9a], .nav-tabs .nav-item.show .nav-link[data-v-1c9cde9a]{\n  color: black;\n      background-color: #b4cee7;\n      border-color: #dee2e6 #dee2e6 #f8fafc;\n}\na[data-v-1c9cde9a]{\n  color: black;\n}\na[data-v-1c9cde9a]:hover{\n  color: black;\n}\n#loader[data-v-1c9cde9a]{\n  color: green;\n  position: relative;\n  top: 50%;\n  left: 50%;\n\n  width: 5rem;\n  height: 5rem;\n}\n#ajax_loader[data-v-1c9cde9a]{\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  padding-top: 250px;\n  background-color: black;\n  opacity: 0.5;\n  z-index: 99;\n  top: 0px;\n  left: 0px;\n}\n#card-header[data-v-1c9cde9a]{\n  color: white;\n}\n.color[data-v-1c9cde9a]{\n  background-color: #5b5b5b;\n}\n.color li[data-v-1c9cde9a]{\n  background-color: #b5c1c2;\n}\n", ""]);
+exports.push([module.i, "\n.card>.list-group:first-child .list-group-item[data-v-1c9cde9a]:first-child {\n     border-top-left-radius: .0rem;\n     border-top-right-radius: .0rem;\n}\n.list-group-item[data-v-1c9cde9a]:first-child {\n    /* border-top-left-radius: inherit; */\n    /*border-top-right-radius: inherit; */\n}\n.nav-tabs .nav-link.active[data-v-1c9cde9a], .nav-tabs .nav-item.show .nav-link[data-v-1c9cde9a]{\n  color: black;\n      background-color: #b4cee7;\n      border-color: #dee2e6 #dee2e6 #f8fafc;\n}\na[data-v-1c9cde9a]{\n  color: black;\n}\na[data-v-1c9cde9a]:hover{\n  color: black;\n}\n#loader[data-v-1c9cde9a]{\n  color: green;\n  position: relative;\n  top: 50%;\n  left: 50%;\n\n  width: 5rem;\n  height: 5rem;\n}\n#ajax_loader[data-v-1c9cde9a]{\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  padding-top: 250px;\n  background-color: ;\n  opacity: 0.5;\n  z-index: 99;\n  top: 0px;\n  left: 0px;\n}\n#card-header[data-v-1c9cde9a]{\n  color: white;\n}\n.color[data-v-1c9cde9a]{\n  background-color: #5b5b5b;\n}\n.color li[data-v-1c9cde9a]{\n  background-color: #b5c1c2;\n}\n.customLink[data-v-1c9cde9a] {\n  cursor: pointer;\n}\n.customLink[data-v-1c9cde9a]:hover {\n  text-decoration: underline;\n}\n", ""]);
 
 // exports
 
@@ -3757,113 +3776,89 @@ var render = function() {
     _vm._v(" "),
     _c(
       "ul",
-      { staticClass: "nav nav-tabs ", attrs: { id: "myTab", role: "tablist" } },
-      [
-        _vm._m(1),
-        _vm._v(" "),
-        _vm.topics === true
-          ? _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "nav-link",
-                  attrs: {
-                    id: "profile-tab",
-                    "data-toggle": "tab",
-                    href: "#profile",
-                    role: "tab",
-                    "aria-controls": "profile",
-                    "aria-selected": "false"
-                  }
-                },
-                [_vm._v(_vm._s(_vm.topics_name))]
-              )
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "li",
-          {
-            directives: [{ name: "show", rawName: "v-show" }],
-            staticClass: "nav-item"
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link",
-                attrs: {
-                  id: "contact-tab",
-                  "data-toggle": "tab",
-                  href: "#contact",
-                  role: "tab",
-                  "aria-controls": "contact",
-                  "aria-selected": "false"
-                }
-              },
-              [_vm._v("szöveg")]
-            )
-          ]
-        )
-      ]
+      { staticClass: "nav nav-tabs", attrs: { id: "myTab", role: "tablist" } },
+      _vm._l(_vm.tabs_menu, function(tabs) {
+        return _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: {
+                id: "profile-tab",
+                "data-toggle": "tab",
+                href: "#tab-" + tabs.id,
+                role: "tab",
+                "aria-controls": "profile",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v(_vm._s(tabs.name))]
+          )
+        ])
+      }),
+      0
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "tab-content", attrs: { id: "myTabContent" } }, [
-      _c(
-        "div",
-        {
-          staticClass: "tab-pane fade show active",
-          attrs: { id: "home", role: "tabpanel", "aria-labelledby": "home-tab" }
-        },
-        [
-          _c("div", { staticClass: "card color" }, [
-            _c(
-              "ul",
-              { staticClass: "list-group list-group-flush" },
-              _vm._l(this.topics_list, function(list, topics_name) {
-                return _c("li", { staticClass: "list-group-item" }, [
-                  _vm._v("\n        Főtéma: "),
-                  _c("b", [
-                    _c(
-                      "a",
-                      {
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            return _vm.topic(topics_name)
-                          }
-                        }
-                      },
-                      [_vm._v(_vm._s(topics_name))]
-                    )
-                  ]),
-                  _vm._v("  Altémák száma: "),
-                  _c("b", [_vm._v(_vm._s(list))]),
-                  _vm._v("  Hozzászólások száma: "),
-                  _c("b", [_vm._v("?")])
-                ])
-              }),
-              0
-            )
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _vm._m(2),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "tab-pane fade",
-          attrs: {
-            id: "contact",
-            role: "tabpanel",
-            "aria-labelledby": "contact-tab"
-          }
-        },
-        [_vm._v("szöveg")]
-      )
-    ])
+    _c(
+      "div",
+      { staticClass: "tab-content", attrs: { id: "myTabContent" } },
+      _vm._l(_vm.tabs_menu, function(tabs) {
+        return _c(
+          "div",
+          {
+            staticClass: "tab-pane fade",
+            attrs: {
+              id: "tab-" + tabs.id,
+              role: "tabpanel",
+              "aria-labelledby": "profile-tab"
+            }
+          },
+          [
+            _c("div", { staticClass: "card color" }, [
+              tabs.id === "fo"
+                ? _c(
+                    "ul",
+                    { staticClass: "list-group list-group-flush" },
+                    _vm._l(_vm.topics_list, function(list, topics_name) {
+                      return _c("li", { staticClass: "list-group-item" }, [
+                        _vm._v("\n            Főtéma: "),
+                        _c(
+                          "b",
+                          {
+                            staticClass: "customLink",
+                            on: {
+                              click: function($event) {
+                                return _vm.topic(topics_name, list.id)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(topics_name))]
+                        ),
+                        _vm._v("  Altémák száma: "),
+                        _c("b", [_vm._v(_vm._s(list.count))]),
+                        _vm._v(
+                          "  Hozzászólások száma: (id:" + _vm._s(list.id) + ")"
+                        ),
+                        _c("b", [_vm._v("?")])
+                      ])
+                    }),
+                    0
+                  )
+                : _c("ul", { staticClass: "list-group list-group-flush" }, [
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _vm._v(
+                        "\n            Az all topics ok " +
+                          _vm._s(tabs.name) +
+                          "\n          "
+                      )
+                    ])
+                  ])
+            ])
+          ]
+        )
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = [
@@ -3881,53 +3876,6 @@ var staticRenderFns = [
         [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c(
-        "a",
-        {
-          staticClass: "nav-link active",
-          attrs: {
-            id: "home-tab",
-            "data-toggle": "tab",
-            href: "#home",
-            role: "tab",
-            "aria-controls": "home",
-            "aria-selected": "true"
-          }
-        },
-        [_vm._v("Fő Témák")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "tab-pane fade",
-        attrs: {
-          id: "profile",
-          role: "tabpanel",
-          "aria-labelledby": "profile-tab"
-        }
-      },
-      [
-        _c("div", { staticClass: "card color" }, [
-          _c("ul", { staticClass: "list-group list-group-flush" }, [
-            _c("li", { staticClass: "list-group-item" }, [
-              _vm._v("\n          Az all topics ok\n        ")
-            ])
-          ])
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true

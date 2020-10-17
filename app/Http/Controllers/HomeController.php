@@ -32,13 +32,25 @@ class HomeController extends Controller
        $main_topics_list = DB::table('all_topics')->where('parent_id', 0)->select('id','topics_name')->get();
 
        foreach($main_topics_list as $row){
-         $topics_array[$row->topics_name] = $topics_list = DB::table('all_topics')->where('parent_id', $row->id)->count();
+         $topics_array[$row->topics_name]['count'] = $topics_list = DB::table('all_topics')->where('parent_id', $row->id)->count();
+         $topics_array[$row->topics_name]['id'] = $row->id;
        }
 
        return response()->json([
          'success' => 'Main list load ok.',
          'topics_list' => $topics_array
-     ]);
+       ]);
+     }
+
+     public function topics_al_list(Request $request)
+     {
+       //sleep(5);
+       $al_topics_list = DB::table('all_topics')->where('parent_id', $request->id)->select('id','topics_name')->get();
+       //$al_topics_list = $request->id;
+       return response()->json([
+         'success'        =>  "Al menü betöltve.",
+         'al_topics_list' =>  $al_topics_list
+       ]);
      }
 
      public function index_right_menu()
@@ -58,6 +70,6 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+      return view('home');
     }
 }

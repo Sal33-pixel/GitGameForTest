@@ -8,42 +8,43 @@
 
     </div></div>
 
-    <ul class="nav nav-tabs " id="myTab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Fő Témák</a>
-      </li>
-      <li class="nav-item" v-if="topics === true">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">{{topics_name}}</a>
-      </li>
-      <li class="nav-item" v-show>
-        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">szöveg</a>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+<!--      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href='#profile' role="tab" aria-controls="home" aria-selected="true">Fő Témák old</a>
+      </li> -->
+      <li class="nav-item" v-for="tabs in tabs_menu">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" :href="'#tab-' + tabs.id" role="tab" aria-controls="profile" aria-selected="false">{{tabs.name}}</a>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
+  <!--    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
     <div class="card color">
       <ul class="list-group list-group-flush">
         <li v-for="(list, topics_name) in this.topics_list"class="list-group-item">
-          Főtéma: <b><a @click="topic(topics_name)" href="#" >{{topics_name}}</a></b>  Altémák száma: <b>{{list}}</b>  Hozzászólások száma: <b>?</b>
+          Főtéma: <b class="customLink" @click="topic(topics_name, list.id)">{{topics_name}}</b>  Altémák száma: <b>{{list.count}}</b>  Hozzászólások száma: {{list.id}}<b>?</b>
         </li>
       </ul>
     </div>
 
-  </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  </div> -->
+    <div v-for="tabs in tabs_menu" class="tab-pane fade" :id="'tab-' + tabs.id" role="tabpanel" aria-labelledby="profile-tab">
 
       <div class="card color">
-        <ul class="list-group list-group-flush">
+        <ul v-if="tabs.id === 'fo'" class="list-group list-group-flush">
+          <li v-for="(list, topics_name) in topics_list" class="list-group-item">
+            Főtéma: <b class="customLink" @click="topic(topics_name, list.id)">{{topics_name}}</b>  Altémák száma: <b>{{list.count}}</b>  Hozzászólások száma: (id:{{list.id}})<b>?</b>
+          </li>
+        </ul>
+
+        <ul v-else class="list-group list-group-flush">
           <li class="list-group-item">
-            Az all topics ok
+            Az all topics ok {{tabs.name}}
           </li>
         </ul>
       </div>
 
     </div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">szöveg</div>
   </div>
 
   </div>
@@ -51,21 +52,24 @@
 
 <script>
 import axios from 'axios';
+  Vue.prototype.$axios = axios;
 
 export default{
   name: 'TopicsForm',
 
   data(){
     return{
-      topics_name: "",
-      topics: false,
+      tabs_menu: [{'name': "Fő Témák", 'id': "fo"}],
       loader:  false,
       topics_list: [],
+      al_topics_list: [],
+      id: null
 
     }
   },
 
 created(){
+  /** Lista adatok lekérése **/
               this.topics_lists();
   /** Ajax loader automatizálása **/
               this.setAxiosLoader();
@@ -73,9 +77,28 @@ created(){
 
 methods: {
 
-  topic(topics_name){
-    this.topics_name = topics_name;
-    this.topics = true;
+  topics_lists(){
+    axios.get('/topics_list').then(function(response) {
+      console.log('response:' + response.data.success);
+      this.topics_list = response.data.topics_list;
+    }.bind(this)).catch(function (error) { console.log('error: ' + error); });
+  },
+
+  topic(topics_name, id){
+  /** Al topics fül létrehozás **/
+    this.tabs_menu.push({
+      'name': topics_name,
+      'id': id
+    });
+    this.id = id;
+
+    axios.post('/topics_al_list', {
+      'id': this.id
+    }).then(function(response){
+      console.log('response: ' + response.data.success);
+      this.al_topics_list = response.data.al_topics_list;
+    }.bind(this)).catch(function (error) {console.log('error: ' + error);});
+
   },
 
   setAxiosLoader() {
@@ -93,14 +116,8 @@ methods: {
                       this.loader = false;
                       return Promise.reject(error);
                   });
-              },
-
-              topics_lists(){
-                axios.get('/topics_list').then(function(response) {
-                  console.log('response:' + response.data.success);
-                  this.topics_list = response.data.topics_list;
-                }.bind(this)).catch(function (error) { console.log('error: ' + error); });
               }
+
   },
 }
 
@@ -145,7 +162,7 @@ a:hover{
   width: 100%;
   height: 100%;
   padding-top: 250px;
-  background-color: black;
+  background-color: ;
   opacity: 0.5;
   z-index: 99;
   top: 0px;
@@ -161,5 +178,11 @@ a:hover{
 }
 .color li{
   background-color: #b5c1c2;
+}
+.customLink {
+  cursor: pointer;
+}
+.customLink:hover {
+  text-decoration: underline;
 }
 </style>
