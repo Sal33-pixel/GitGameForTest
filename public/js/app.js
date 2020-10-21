@@ -2188,6 +2188,11 @@ Vue.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
         console.log('error: ' + error);
       });
     },
+    loadTabContent: function loadTabContent(tabId) {
+      if (tabId == 'fo') return false;
+      console.log('id: ' + tabId);
+      $('#tab-' + tabId).empty().html('IDE JÖN A BETÖLTÖTT ' + tabId + ' ADAT!!');
+    },
     topic: function topic(topics_name, id) {
       /** Al topics fül létrehozás **/
       this.tabs_menu.push({
@@ -3777,19 +3782,24 @@ var render = function() {
     _c(
       "ul",
       { staticClass: "nav nav-tabs", attrs: { id: "myTab", role: "tablist" } },
-      _vm._l(_vm.tabs_menu, function(tabs) {
+      _vm._l(_vm.tabs_menu, function(tabs, index) {
         return _c("li", { staticClass: "nav-item" }, [
           _c(
             "a",
             {
-              staticClass: "nav-link",
+              class: { "nav-link": true, active: index == 0 },
               attrs: {
                 id: "profile-tab",
                 "data-toggle": "tab",
                 href: "#tab-" + tabs.id,
                 role: "tab",
                 "aria-controls": "profile",
-                "aria-selected": "false"
+                "aria-selected": index == 0 ? true : false
+              },
+              on: {
+                click: function($event) {
+                  return _vm.loadTabContent(tabs.id)
+                }
               }
             },
             [_vm._v(_vm._s(tabs.name))]
@@ -3802,11 +3812,16 @@ var render = function() {
     _c(
       "div",
       { staticClass: "tab-content", attrs: { id: "myTabContent" } },
-      _vm._l(_vm.tabs_menu, function(tabs) {
+      _vm._l(_vm.tabs_menu, function(tabs, indexTab) {
         return _c(
           "div",
           {
-            staticClass: "tab-pane fade",
+            class: {
+              "tab-pane": true,
+              fade: true,
+              active: indexTab == 0,
+              show: indexTab == 0
+            },
             attrs: {
               id: "tab-" + tabs.id,
               role: "tabpanel",

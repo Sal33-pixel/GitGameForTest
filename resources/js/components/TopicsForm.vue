@@ -12,8 +12,8 @@
 <!--      <li class="nav-item">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href='#profile' role="tab" aria-controls="home" aria-selected="true">Fő Témák old</a>
       </li> -->
-      <li class="nav-item" v-for="tabs in tabs_menu">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" :href="'#tab-' + tabs.id" role="tab" aria-controls="profile" aria-selected="false">{{tabs.name}}</a>
+      <li class="nav-item" v-for="(tabs, index) in tabs_menu">
+        <a @click="loadTabContent(tabs.id)" :class="{'nav-link': true, 'active': (index == 0)}" id="profile-tab" data-toggle="tab" :href="'#tab-' + tabs.id" role="tab" aria-controls="profile" :aria-selected="(index == 0 ? true : false)">{{tabs.name}}</a>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -28,7 +28,7 @@
     </div>
 
   </div> -->
-    <div v-for="tabs in tabs_menu" class="tab-pane fade" :id="'tab-' + tabs.id" role="tabpanel" aria-labelledby="profile-tab">
+    <div v-for="(tabs, indexTab) in tabs_menu" :class="{'tab-pane': true, 'fade': true, 'active': (indexTab == 0), 'show': (indexTab == 0)}" :id="'tab-' + tabs.id" role="tabpanel" aria-labelledby="profile-tab">
 
       <div class="card color">
         <ul v-if="tabs.id === 'fo'" class="list-group list-group-flush">
@@ -82,6 +82,13 @@ methods: {
       console.log('response:' + response.data.success);
       this.topics_list = response.data.topics_list;
     }.bind(this)).catch(function (error) { console.log('error: ' + error); });
+  },
+
+  loadTabContent(tabId) {
+    if (tabId == 'fo') return false;
+    
+    console.log('id: ' + tabId);
+    $('#tab-' + tabId).empty().html('IDE JÖN A BETÖLTÖTT ' + tabId + ' ADAT!!');
   },
 
   topic(topics_name, id){
