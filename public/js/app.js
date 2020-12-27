@@ -2143,19 +2143,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 Vue.prototype.$axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3836,7 +3823,7 @@ var render = function() {
                     { staticClass: "list-group list-group-flush" },
                     _vm._l(_vm.topics_list, function(list, topics_name) {
                       return _c("li", { staticClass: "list-group-item" }, [
-                        _vm._v("\n            Főtéma: "),
+                        _vm._v("\n          Főtéma: "),
                         _c(
                           "b",
                           {
@@ -3851,9 +3838,7 @@ var render = function() {
                         ),
                         _vm._v("  Altémák száma: "),
                         _c("b", [_vm._v(_vm._s(list.count))]),
-                        _vm._v(
-                          "  Hozzászólások száma: (id:" + _vm._s(list.id) + ")"
-                        ),
+                        _vm._v("  Hozzászólások száma: "),
                         _c("b", [_vm._v("?")])
                       ])
                     }),
@@ -3862,9 +3847,9 @@ var render = function() {
                 : _c("ul", { staticClass: "list-group list-group-flush" }, [
                     _c("li", { staticClass: "list-group-item" }, [
                       _vm._v(
-                        "\n            Az all topics ok " +
+                        "\n          Az all topics ok " +
                           _vm._s(tabs.name) +
-                          "\n          "
+                          "\n        "
                       )
                     ])
                   ])

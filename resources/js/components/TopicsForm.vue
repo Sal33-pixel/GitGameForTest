@@ -9,35 +9,22 @@
     </div></div>
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-<!--      <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href='#profile' role="tab" aria-controls="home" aria-selected="true">Fő Témák old</a>
-      </li> -->
       <li class="nav-item" v-for="(tabs, index) in tabs_menu">
         <a @click="loadTabContent(tabs.id)" :class="{'nav-link': true, 'active': (index == 0)}" id="profile-tab" data-toggle="tab" :href="'#tab-' + tabs.id" role="tab" aria-controls="profile" :aria-selected="(index == 0 ? true : false)">{{tabs.name}}</a>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-  <!--    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-    <div class="card color">
-      <ul class="list-group list-group-flush">
-        <li v-for="(list, topics_name) in this.topics_list"class="list-group-item">
-          Főtéma: <b class="customLink" @click="topic(topics_name, list.id)">{{topics_name}}</b>  Altémák száma: <b>{{list.count}}</b>  Hozzászólások száma: {{list.id}}<b>?</b>
-        </li>
-      </ul>
-    </div>
-
-  </div> -->
     <div v-for="(tabs, indexTab) in tabs_menu" :class="{'tab-pane': true, 'fade': true, 'active': (indexTab == 0), 'show': (indexTab == 0)}" :id="'tab-' + tabs.id" role="tabpanel" aria-labelledby="profile-tab">
 
       <div class="card color">
         <ul v-if="tabs.id === 'fo'" class="list-group list-group-flush">
           <li v-for="(list, topics_name) in topics_list" class="list-group-item">
-            Főtéma: <b class="customLink" @click="topic(topics_name, list.id)">{{topics_name}}</b>  Altémák száma: <b>{{list.count}}</b>  Hozzászólások száma: (id:{{list.id}})<b>?</b>
+            Főtéma: <b class="customLink" @click="topic(topics_name, list.id)">{{topics_name}}</b>  Altémák száma: <b>{{list.count}}</b>  Hozzászólások száma: <b>?</b>
           </li>
         </ul>
 
-        <ul v-else class="list-group list-group-flush">
+       <ul v-else class="list-group list-group-flush">
           <li class="list-group-item">
             Az all topics ok {{tabs.name}}
           </li>
@@ -86,9 +73,10 @@ methods: {
 
   loadTabContent(tabId) {
     if (tabId == 'fo') return false;
-    
+
     console.log('id: ' + tabId);
-    $('#tab-' + tabId).empty().html('IDE JÖN A BETÖLTÖTT ' + tabId + ' ADAT!!');
+    $('#tab-' + tabId).empty()
+    .html('IDE JÖN A BETÖLTÖTT ' + tabId + ' ADAT!!');
   },
 
   topic(topics_name, id){
